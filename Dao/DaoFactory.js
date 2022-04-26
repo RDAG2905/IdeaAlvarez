@@ -17,10 +17,10 @@ class DaoFactory{
     getDao(){
         if (this.tipoPersistencia == 'productoSql') {
             //return new productosDaoSQL(config.get('optionsMySql'),'productos')
-            return new productosDaoSQL(optionsMySql,'productos')
+            return new productosDaoSQL('productos')
         }else
         if (this.tipoPersistencia == 'carritoSql') {
-            return new carritosDaoSQL(config.get('optionsMySql'),'carritos')
+            return new carritosDaoSQL('carritos')
         }else 
         if (this.tipoPersistencia == 'productoMongo') {
             return new productosDaoMongo()

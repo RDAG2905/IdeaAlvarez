@@ -1,8 +1,8 @@
 const ContenedorSQL = require("../Persistencia/ContenedorSQL")
 
 class ProductosDaoSQL extends ContenedorSQL{
-    constructor(){
-     super()
+    constructor(table){
+     super(table)
     }
     
     

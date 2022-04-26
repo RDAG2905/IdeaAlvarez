@@ -3,9 +3,8 @@ const knex = require('knex')
 
 class ContenedorSQL{
 
-    constructor(dbOptions,table){
-     //console.log(dbOptions)
-     //this.dbConnection =  knex(dbOptions)
+    constructor(table){
+     
      this.dbConnection =  knex(config.get('optionsMySql'))
      this.table = table
     }
@@ -120,12 +119,12 @@ class ContenedorSQL{
     }
  
 
-    async getRelationShip(id){
+    async getCarritoConProductos(id){
         return new Promise((res,rej)=>{
-            this.dbConnection('Carritos')
-                .join('Productos', 'Carritos.id', '=', 'Productos.carritoId')  
-                .select('users.id', 'contacts.phone')    
+            this.dbConnection(this.table)
+                .raw('Call GetCarritoConProductos(${id});')  
                 .then((rows)=>{
+                    console.log(rows)
                  res(rows)
             }).catch((err)=>{
                 rej(console.log(err))

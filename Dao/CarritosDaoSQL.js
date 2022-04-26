@@ -1,9 +1,9 @@
 const ContenedorSQL = require("../Persistencia/ContenedorSQL")
 
 class CarritosDaoSQL extends ContenedorSQL{
-    constructor(){
-     super()
-    }
+    constructor(table){
+        super(table)
+       }
     
     
     }

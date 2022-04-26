@@ -24,12 +24,28 @@ router.post('/',(req,res)=>{
         )        
 })
 
+
+
+router.delete('/:id',(req,res)=>{
+    let id = req.params.id
+    let factory = new daoFactory(config.get('tipoPersistencia.persistenciaD')) 
+    let dao = factory.getDao()  
+      dao.delete(id)
+         .then(carritoEliminado =>
+             res.send({carritoEliminado})
+         )
+         .catch(error=>
+             res.send({error})
+         )
+    
+ })
+ 
 //pendiente*****************************
 router.get('/:id/productos',async (req,res)=>{
    let idcarrito = req.params.id
    let factory = new daoFactory(config.get('tipoPersistencia.persistenciaD')) 
    let dao = factory.getDao()
-   let carrito = await dao.getById(idcarrito)
+   let carrito = await dao.getCarritoConProductos(idcarrito)
    if(!carrito){
        res.send({error})
    } else{
@@ -68,18 +84,6 @@ router.post('/:id/productos', async (req,res)=>{
 
 
 
-
-router.delete('/:id',(req,res)=>{
-   let id = req.params.id
-   daoCarritos.delete(id)
-        .then(carritoEliminado =>
-            res.send({carritoEliminado})
-        )
-        .catch(error=>
-            res.send({error})
-        )
-   
-})
 
 
 //pendiente****************************************

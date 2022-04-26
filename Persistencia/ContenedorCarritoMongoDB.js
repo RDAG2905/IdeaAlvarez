@@ -16,8 +16,8 @@ class ContenedorCarritoMongo{
     }
    
      
-
-    async getById(id){
+    //solo para carritos 
+    async getCarritoConProductos(id){
       return await model.findById(id)
     }
 
