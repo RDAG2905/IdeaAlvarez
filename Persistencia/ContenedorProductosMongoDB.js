@@ -6,13 +6,13 @@ const mongoConnectionString = config.get('mongoDB.connection')
 class ContenedorProductosMongo{
 
     constructor(){
-        //const URL = 'mongodb://localhost:27017/ecommerce2'
+        
         const URL = mongoConnectionString
         mongoose.connect(URL, {});   
         console.log('Base de datos conectada');
     }
    
-    
+
     async getAll(){
         return await model.find({});
     }

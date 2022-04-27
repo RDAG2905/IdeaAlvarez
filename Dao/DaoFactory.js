@@ -15,8 +15,7 @@ class DaoFactory{
     
    
     getDao(){
-        if (this.tipoPersistencia == 'productoSql') {
-            //return new productosDaoSQL(config.get('optionsMySql'),'productos')
+        if (this.tipoPersistencia == 'productoSql') {            
             return new productosDaoSQL('productos')
         }else
         if (this.tipoPersistencia == 'carritoSql') {

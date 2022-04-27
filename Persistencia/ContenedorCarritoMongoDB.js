@@ -16,7 +16,7 @@ class ContenedorCarritoMongo{
     }
    
      
-    //solo para carritos 
+    //el nombre es para que se polimórfico con el  sql 
     async getCarritoConProductos(id){
       return await model.findById(id)
     }
@@ -35,14 +35,14 @@ class ContenedorCarritoMongo{
 
 
     async AgregarProductoAlCarrito(idCarrito,producto){
-        let carrito = await this.getCarritoById(idCarrito)
+        let carrito = await this.getCarritoConProductos(idCarrito)
         carrito.productos.push(producto)
         this.editarCarrito(carrito,carrito._id)       
     } 
 
 
     async eliminarProductoDelCarrito(idCarrito,idProducto){
-        let carrito = await this.getCarritoById(idCarrito)
+        let carrito = await this.getCarritoConProductos(idCarrito)
         carrito.productos = carrito.productos.filter(prod =>prod._id != idProducto)
         this.editarCarrito(carrito,carrito._id)
     }

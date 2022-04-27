@@ -100,10 +100,34 @@ class ContenedorSQL{
         
     }
 
-
-    async saveRelationShip(item){   
+    async eliminarProductoDelCarrito(idCarrito,idProducto){
         return new Promise((res,rej)=>{
-            this.dbConnection(this.table).insert(item)
+            this.dbConnection('productoscarrito')
+                .where("idProducto",idProducto)
+                .andWhere('idCarrito', idCarrito)
+                .del()         
+                .then((rows)=>{
+                 res(rows)
+            }).catch((err)=>{
+                rej(console.log(err))
+                console.log(err.sqlMessage)
+                console.log(err.sql)
+            }).finally(()=>{
+              //  this.dbConnection.destroy()
+            })
+                  
+        })       
+        
+    }
+
+
+    async AgregarProductoAlCarrito(idCarrito,producto){  
+        let item = {
+            idCarrito:idCarrito,
+            idProducto:producto.id
+        } 
+        return new Promise((res,rej)=>{
+            this.dbConnection('productoscarrito').insert(item)
                 .then((rows)=>{
                  res(rows)
             }).catch((err)=>{

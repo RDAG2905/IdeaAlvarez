@@ -63,9 +63,12 @@ router.get('/:id/productos',async (req,res)=>{
 router.post('/:id/productos', async (req,res)=>{
     let idProductoNuevo = req.body.id
     let idCarrito = req.params.id
-    let daoProductos = new productosRepo()
+       
+    let factory1 = new daoFactory(config.get('tipoPersistencia.persistenciaC')) 
+    let daoProductos = factory1.getDao()
     let productoNuevo = await daoProductos.getById(idProductoNuevo)
-    
+    let factory2 = new daoFactory(config.get('tipoPersistencia.persistenciaD')) 
+    let daoCarritos = factory2.getDao()
         if(!productoNuevo){
             res.send({errorProducto})
         }else{            
