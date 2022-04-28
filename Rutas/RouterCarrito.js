@@ -63,12 +63,26 @@ router.get('/:id/productos',async (req,res)=>{
 router.post('/:id/productos', async (req,res)=>{
     let idProductoNuevo = req.body.id
     let idCarrito = req.params.id
-       
+     
+    let factory2 = new daoFactory(config.get('tipoPersistencia.persistenciaD')) 
+    if(factory2.tipoPersistencia == 'carritoSql'){
+        daoCarritos.AgregarProductoAlCarrito(idCarrito,idProductoNuevo)
+        .then(
+            res.send({'OK':'Producto Agregado con éxito'}) 
+        )
+        .catch(error=>
+            res.send({error}) 
+        )
+    
+    }else{
+
+    
+    let daoCarritos = factory2.getDao()
     let factory1 = new daoFactory(config.get('tipoPersistencia.persistenciaC')) 
     let daoProductos = factory1.getDao()
+    //console.log('idProductoNuevo : ' + idProductoNuevo)
     let productoNuevo = await daoProductos.getById(idProductoNuevo)
-    let factory2 = new daoFactory(config.get('tipoPersistencia.persistenciaD')) 
-    let daoCarritos = factory2.getDao()
+    
         if(!productoNuevo){
             res.send({errorProducto})
         }else{            
@@ -80,7 +94,8 @@ router.post('/:id/productos', async (req,res)=>{
                     res.send({error}) 
                 )
             
-        }
+            }
+        }   
     
 })
 

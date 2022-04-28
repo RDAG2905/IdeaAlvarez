@@ -130,10 +130,10 @@ class ContenedorSQL{
     }
 
 
-    async AgregarProductoAlCarrito(idCarrito,producto){  
+    async AgregarProductoAlCarrito(idCarrito,idProducto){  
         let item = {
             idCarrito:idCarrito,
-            idProducto:producto.id
+            idProducto:idProducto
         } 
         console.log(item)
         return new Promise((res,rej)=>{
