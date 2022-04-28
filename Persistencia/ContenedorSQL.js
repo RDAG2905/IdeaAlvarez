@@ -1,5 +1,6 @@
 const config = require('config')
 const knex = require('knex')
+let carritoSql = require('../Business/CarritoSQL')
 
 class ContenedorSQL{
 
@@ -46,7 +47,8 @@ class ContenedorSQL{
     }
 
 
-    async save(item){   
+    async save(item){ 
+        console.log(item)  
         return new Promise((res,rej)=>{
             this.dbConnection(this.table).insert(item)
                 .then((rows)=>{
@@ -61,6 +63,13 @@ class ContenedorSQL{
                   
         })  
     }
+
+    
+    async saveCarrito(){ 
+        let item = new carritoSql()
+        this.save(item) 
+    }
+
 
 
     
@@ -126,6 +135,7 @@ class ContenedorSQL{
             idCarrito:idCarrito,
             idProducto:producto.id
         } 
+        console.log(item)
         return new Promise((res,rej)=>{
             this.dbConnection('productoscarrito').insert(item)
                 .then((rows)=>{
@@ -146,7 +156,8 @@ class ContenedorSQL{
     async getCarritoConProductos(id){
         return new Promise((res,rej)=>{
             this.dbConnection(this.table)
-                .raw('Call GetCarritoConProductos(${id});')  
+               // .raw('Call GetCarritoConProductos(${id});')  
+                .raw('select * from carritos inner join productoscarrito on carritos.Id = productoscarrito.idCarrito inner join productos on productoscarrito.idProducto = productos.id where carritos.Id = ?',id)              
                 .then((rows)=>{
                     console.log(rows)
                  res(rows)

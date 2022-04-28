@@ -1,4 +1,4 @@
-class Carrito{
+class CarritoMongo{
 
     constructor(){
         this.productos = []
@@ -14,4 +14,4 @@ class Carrito{
     GetProducts(){this.productos}
 }
 
-module.exports = Carrito
+module.exports = CarritoMongo

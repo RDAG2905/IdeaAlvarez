@@ -1,6 +1,6 @@
 
 const productosRepo = require('./Repository')
-const carrito = require('../Business/Carrito')
+const carrito = require('../Business/CarritoMongo')
 class CarritoRepository{
     
     constructor(){

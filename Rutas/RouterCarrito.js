@@ -1,5 +1,5 @@
 const express = require('express')
-const Carrito = require('../Business/Carrito.js')
+const Carrito = require('../Business/CarritoMongo.js')
 const { Router } = express
 const router = Router()
 const repository = require('../Dao/CarritosDaoMongoDB')
@@ -7,7 +7,7 @@ const daoCarritos = new repository()
 const productosRepo = require('../Dao/ProductosDaoMongoDB')
 const daoProductos = new productosRepo()
 const daoFactory = require('../Dao/DaoFactory')
-const error = 'carrito no encontrado' 
+//const error = 'carrito no encontrado' 
 const errorProducto = 'producto no encontrado' 
 const config = require('config');
 
@@ -15,7 +15,7 @@ const config = require('config');
 router.post('/',(req,res)=>{ 
     let factory = new daoFactory(config.get('tipoPersistencia.persistenciaD')) 
     let dao = factory.getDao()  
-     dao.save(new Carrito())
+     dao.saveCarrito()
         .then(carrito =>         
             res.send({carrito}) 
         )

@@ -23,7 +23,7 @@ const getDao = (tipoPersistencia)=>{
 
 router.get('/:id?',(req,res)=>{
    let idProducto = req.params.id    
-   let dao = getDao(config.get('tipoPersistencia.persistenciaA'))
+   let dao = getDao(config.get('tipoPersistencia.persistenciaC'))
    
         if(!idProducto){
                     dao.getAll()

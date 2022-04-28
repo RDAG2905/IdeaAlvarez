@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const model = require('../models/CarritoMongoDb');    
-const carrito = require('../Business/Carrito')
+const carrito = require('../Business/CarritoMongo')
 const config = require('config')
 const mongoConnectionString = config.get('mongoDB.connection')  
 
@@ -22,8 +22,9 @@ class ContenedorCarritoMongo{
     }
 
 
-    async save(carrito){
-        const modelCarrito = model(carrito);
+    async saveCarrito(){
+        let unCarrito = new carrito()
+        const modelCarrito = model(unCarrito);
         return await modelCarrito.save();
         
     }
